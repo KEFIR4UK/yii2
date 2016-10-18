@@ -6,6 +6,10 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'controllerMap' => [
+        'test' => 'app\controllers\SiteController',
+
+    ],
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
@@ -42,10 +46,10 @@ $config = [
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
-            'enableStrictParsing' => true,
-            'rules' => [
-                'hello/<message:\w+>' => 'site/say-message',
-            ],
+            //'enableStrictParsing' => true,
+            /*'rules' => [
+
+            ],*/
         ],
 
     ],
@@ -55,14 +59,12 @@ $config = [
 if (YII_ENV_DEV) {
     // configuration adjustments for 'dev' environment
     $config['bootstrap'][] = 'debug';
-    $config['modules']['debug'] = [
-        'class' => 'yii\debug\Module',
-    ];
+    $config['modules']['debug']['class'] = 'yii\debug\Module';
+    $config['modules']['debug']['allowedIPs'] = ['*'];
 
     $config['bootstrap'][] = 'gii';
-    $config['modules']['gii'] = [
-        'class' => 'yii\gii\Module',
-    ];
+    $config['modules']['gii']['class'] = 'yii\gii\Module';
+    $config['modules']['gii']['allowedIPs'] = ['*'];
 }
 
 return $config;
